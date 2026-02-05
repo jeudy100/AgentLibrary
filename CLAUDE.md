@@ -151,6 +151,18 @@ All components are language-agnostic. They detect project type from:
     generate-release-notes/SKILL.md
 ```
 
+## File Storage Rules
+
+**Plans and temporary files must NOT be saved in the project directory.**
+
+When creating plans, improvement documents, or any temporary working files:
+- Save to the user's `.claude` folder: `~/.claude/plans/` or `~/.claude/temp/`
+- On Windows: `C:\Users\<username>\.claude\plans\`
+- Never create a `.claude/plans/` folder in the project
+- The project's `.claude/` folder should only contain agents and skills
+
+This keeps the project clean and prevents temporary files from being committed.
+
 ## Design Principles
 
 1. **Language-agnostic**: Adapts to any project type

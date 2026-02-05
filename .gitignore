@@ -1,2 +1,6 @@
 # Local Claude Code settings (user-specific)
 .claude/settings.local.json
+
+# Plans and temporary files (should be in user's ~/.claude/ folder)
+.claude/plans/
+.claude/temp/
