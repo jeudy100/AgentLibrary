@@ -22,6 +22,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 | `code-architect` | Analyzes architecture, detects anti-patterns, evaluates design |
 | `build-validator` | Validates builds, checks dependencies, runs quality gates |
 | `refiner` | Discovers and analyzes agent/skill definitions by name |
+| `context-generator` | Explores codebase and generates modular context documentation |
 
 ### Using Agents
 
@@ -31,6 +32,7 @@ Agents are invoked via the Task tool with the agent name:
 - "Use code-simplifier to simplify my recent changes"
 - "Use code-architect to review the architecture"
 - "Use build-validator to check if my code is ready to merge"
+- "Use context-generator to document this codebase"
 
 ## Skills
 
@@ -140,6 +142,7 @@ All components are language-agnostic. They detect project type from:
     code-architect.md
     build-validator.md
     refiner.md
+    context-generator.md
   skills/
     run-tests/SKILL.md
     lint-code/SKILL.md
