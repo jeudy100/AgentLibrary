@@ -5,7 +5,10 @@ Run code linters based on project configuration. Uses centralized detection to d
 ## Usage
 
 ```
-/lint-code
+/lint-code                    # Lint entire project
+/lint-code src/utils.ts       # Lint specific file
+/lint-code --fix              # Auto-fix issues
+/lint-code src/ --fix         # Lint directory with auto-fix
 ```
 
 Lints the entire project by default. You can also specify:
@@ -96,6 +99,29 @@ bundle exec rubocop
 bundle exec rubocop -a  # with auto-fix
 ```
 
+**Java:**
+```bash
+# Checkstyle (via Maven)
+mvn checkstyle:check
+
+# Checkstyle (via Gradle)
+./gradlew checkstyleMain
+
+# SpotBugs
+mvn spotbugs:check
+./gradlew spotbugsMain
+```
+
+**C#/.NET:**
+```bash
+# dotnet format
+dotnet format --verify-no-changes
+dotnet format  # with auto-fix
+
+# With analyzers
+dotnet build /p:TreatWarningsAsErrors=true
+```
+
 ### Step 3: Parse Results
 
 Extract from linter output:
@@ -175,6 +201,114 @@ linters:
     - errcheck
     - staticcheck
 ```
+
+---
+
+## Linter Priority
+
+When multiple linters are configured, use this order:
+
+**JavaScript/TypeScript:**
+1. `package.json` scripts.lint → use that command
+2. Biome (if `biome.json` exists)
+3. ESLint (if `.eslintrc*` exists)
+4. Prettier (formatting only, if `.prettierrc*` exists)
+
+**Python:**
+1. `pyproject.toml` configured tool → use that
+2. Ruff (preferred - fast, modern)
+3. Flake8 + Black (legacy setup)
+
+**If multiple linters configured:**
+Run in order: static analysis first, then formatting.
+Example: ESLint → Prettier, or Ruff check → Ruff format
+
+---
+
+## Error Handling
+
+### No Linter Configured
+
+If no linter configuration is found:
+
+```
+No linter configured for this project.
+
+Question: "Would you like to set up a linter?"
+Options:
+  - Show recommended linter for [detected language]
+  - Continue without linting
+  - Cancel
+```
+
+**Recommendations by language:**
+- Node.js → ESLint + Prettier
+- Python → Ruff
+- Go → golangci-lint
+- Rust → Clippy (built-in)
+- Ruby → RuboCop
+- Java → Checkstyle
+- C#/.NET → dotnet format
+
+### Linter Not Installed
+
+If the linter command fails with "command not found":
+
+```
+Linter '[name]' is not installed.
+
+Question: "How should I proceed?"
+Options:
+  - Show installation instructions
+  - Try a different linter
+  - Cancel
+```
+
+**Installation commands:**
+- ESLint: `npm install -D eslint`
+- Prettier: `npm install -D prettier`
+- Ruff: `pip install ruff`
+- golangci-lint: `go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`
+- RuboCop: `gem install rubocop`
+
+### Invalid Configuration
+
+If linter fails due to config errors:
+
+```
+## Configuration Error
+
+Linter '[name]' failed due to invalid configuration.
+
+Error: [error message]
+Config file: [path to config]
+
+Fix the configuration, then run `/lint-code` again.
+```
+
+### Exit Code Handling
+
+| Exit Code | Meaning |
+|-----------|---------|
+| `0` | No issues found (PASSED) |
+| `1` | Lint issues found (report them) |
+| `2+` | Configuration or runtime error |
+
+### Timeout on Large Codebase
+
+If linting takes longer than 60 seconds:
+
+```
+Warning: Linting is taking a long time on this codebase.
+
+Question: "How should I proceed?"
+Options:
+  - Continue waiting
+  - Lint specific directory instead
+  - Cancel
+```
+
+---
 
 ## Tips
 

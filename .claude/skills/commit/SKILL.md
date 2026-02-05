@@ -18,7 +18,7 @@ Options:
 
 ### Step 1: Discover Project Context
 
-Use the **Explore** agent to discover project context:
+Use the **Explore** agent (via Task tool with subagent_type="Explore") to discover project context:
 
 **Explore Prompt:**
 > Discover project context for creating commits. Find and read:
@@ -34,6 +34,8 @@ From the Explore results, extract:
 - Commit message conventions
 - Any commit-specific instructions from CLAUDE.md
 
+If Explore returns no project-specific context, proceed with default conventional commit conventions.
+
 ### Step 2: Gather Git State
 
 ```bash
@@ -43,8 +45,11 @@ git branch --show-current
 # Check if in detached HEAD state
 git symbolic-ref -q HEAD || echo "DETACHED HEAD"
 
-# Staged changes
+# Staged changes (file names and status)
 git diff --cached --name-status
+
+# Staged changes (actual diff content for understanding changes)
+git diff --cached
 
 # Unstaged changes
 git diff --name-status
@@ -55,6 +60,8 @@ git ls-files --others --exclude-standard
 # Recent commits for context
 git log --oneline -5
 ```
+
+**Important:** Read the full `git diff --cached` output to understand what changed, not just which files. This is essential for generating accurate commit messages.
 
 ### Step 3: Stage Changes
 
@@ -105,6 +112,18 @@ Otherwise, analyze staged changes and generate a conventional commit message:
 | `chore` | Maintenance, dependencies |
 | `build` | Build system changes |
 | `ci` | CI configuration changes |
+| `revert` | Reverting a previous commit |
+
+**Breaking Changes:**
+- Use `!` after type/scope for breaking changes: `feat!: remove deprecated API`
+- Or add footer: `BREAKING CHANGE: <description>`
+
+Examples:
+```
+feat!: remove support for Node 14
+
+BREAKING CHANGE: Node 14 is no longer supported. Upgrade to Node 16+.
+```
 
 **Guidelines:**
 - Subject line: max 50 characters, imperative mood, no period
@@ -254,6 +273,29 @@ Conflicted files:
 Resolve conflicts first, then run `/commit` again.
 ```
 
+### Not a Git Repository
+
+If git commands fail because this is not a git repository:
+
+```
+Error: Not a git repository.
+
+To initialize a repository:
+  git init
+```
+
+### Git Not Configured
+
+If git user is not configured:
+
+```
+Warning: Git user not configured.
+
+Run these commands to configure:
+  git config user.name "Your Name"
+  git config user.email "your.email@example.com"
+```
+
 ---
 
 ## Best Practices
@@ -279,6 +321,27 @@ asdf
 - Keep commits focused on a single change
 - Separate refactoring from feature changes
 - Don't mix formatting changes with logic changes
+
+---
+
+## Flag Combinations
+
+How flags interact when combined:
+
+| Flags | Behavior |
+|-------|----------|
+| `--all --message` | Stage all changes and use provided message |
+| `--amend --all` | Stage all changes and amend previous commit |
+| `--amend --message` | Amend with new message (replaces previous message entirely) |
+| `--no-verify` | Can combine with any other flags |
+| `--all --amend --message` | Stage all, amend with provided message |
+
+---
+
+## Co-Author Line
+
+- **Include** `Co-Authored-By: Claude <noreply@anthropic.com>` when Claude generates or significantly modifies the commit message
+- **Omit** when user provides complete message via `--message` flag and doesn't want attribution
 
 ## Related Skills
 

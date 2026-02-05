@@ -15,11 +15,22 @@ Analyze an agent or skill definition by name and suggest improvements for clarit
 
 ### Step 1: Discover Project Context
 
-Use Explore agent to understand where definitions live:
+Use the **Explore** agent (via Task tool with subagent_type="Explore") to discover project context:
 
-> Find where agent and skill definitions are stored in this project.
-> Search for patterns: "# * Agent" in markdown files, "SKILL.md" files.
-> Return: Definition locations, naming conventions, any style guides from CLAUDE.md.
+**Explore Prompt:**
+> Discover project context for analyzing definitions. Find and read:
+>
+> 1. **Root CLAUDE.md** - Read `CLAUDE.md` at project root. All instructions are MANDATORY.
+> 2. **Definition Locations** - Search for `.claude/agents/*.md` and `.claude/skills/*/SKILL.md`
+> 3. **Style Guides** - Search `**/CLAUDE.md` for keywords: agent, skill, definition, template, convention
+>
+> Return: Definition locations, naming conventions, style guidelines
+
+From the Explore results, extract:
+- Where agent definitions are stored
+- Where skill definitions are stored
+- Any naming conventions or templates to follow
+- Style guidelines from CLAUDE.md files
 
 ### Step 2: Locate the Definition
 
@@ -95,6 +106,19 @@ Evaluate each dimension:
 | Error Resilience | Failure scenarios have user questions |
 | User Fallbacks | Options provided (not open-ended questions) |
 | Examples | Before/after or usage examples where helpful |
+
+**Rating Definitions:**
+
+| Rating | Criteria |
+|--------|----------|
+| High | Fully meets expectations, no issues |
+| Medium | Mostly meets expectations, minor issues |
+| Low | Significant gaps or ambiguities |
+
+**Overall Quality Mapping:**
+- **High**: All criteria rated High or Medium, no Critical issues
+- **Medium**: At least one Low rating or one Critical issue
+- **Needs Improvement**: Multiple Low ratings or multiple Critical issues
 
 ### Step 6: Generate Suggestions
 
@@ -181,6 +205,38 @@ For each issue found:
 - [✓/✗] Offers clear options to user (not open-ended)
 ```
 
+## Example Analysis (Abbreviated)
+
+For `/refine commit`:
+
+```markdown
+## Definition Analysis: commit
+
+**File**: .claude/skills/commit/SKILL.md
+**Type**: Skill
+**Overall Quality**: High
+
+## Quality Assessment
+
+| Criterion | Rating | Details |
+|-----------|--------|---------|
+| Clarity | High | Clear conventional commit format with examples |
+| Error Resilience | High | 5 error scenarios with user options |
+
+## Improvements
+
+### [Suggestion]: Add git config check
+
+**Current:** Missing
+
+**Suggested:**
+Add to Step 2: `git config user.email` to verify git is configured.
+
+**Why**: Prevents cryptic errors if user hasn't configured git.
+```
+
+---
+
 ## Error Handling
 
 ### Definition Not Found
@@ -223,6 +279,16 @@ Question: "The definition '[name]' appears empty or incomplete. What would you l
 Options:
   - Generate a template for [Agent/Skill]
   - Show what's missing
+  - Cancel
+```
+
+### File Access Error
+
+```
+Question: "Cannot read the file at '[path]'. The file may be inaccessible or corrupted."
+Options:
+  - Try a different path
+  - Check file permissions
   - Cancel
 ```
 

@@ -96,6 +96,15 @@ dotnet test
 dotnet test --filter "FullyQualifiedName~TestName"
 ```
 
+**Ruby:**
+```bash
+bundle exec rspec
+# or specific file
+bundle exec rspec spec/models/user_spec.rb
+# or specific line
+bundle exec rspec spec/models/user_spec.rb:42
+```
+
 ### Step 3: Parse Results
 
 After running tests, parse the output to identify:
@@ -124,6 +133,135 @@ Output in this format:
 
 [If failures, show details]
 ```
+
+---
+
+## Detection Precedence
+
+When multiple project files exist, use this order:
+1. **CLAUDE.md instructions** - Explicit test command (highest priority)
+2. **package.json** - `scripts.test` field (Node.js)
+3. **pyproject.toml** - `[tool.pytest]` section (Python)
+4. **go.mod** - Presence indicates Go project
+5. **Cargo.toml** - Presence indicates Rust project
+6. **Gemfile** - Presence indicates Ruby project
+7. **pom.xml / build.gradle** - Java project
+8. **Makefile** - `test` target (fallback)
+
+If detection fails, ask the user:
+```
+Question: "Could not detect test framework. What command runs your tests?"
+Options:
+  - Provide test command
+  - Cancel
+```
+
+---
+
+## Exit Code Handling
+
+Interpret test runner exit codes:
+| Exit Code | Meaning |
+|-----------|---------|
+| `0` | All tests passed |
+| `1` | Test failures occurred |
+| Other non-zero | Infrastructure/configuration error |
+
+**Note:** Don't rely solely on exit codes - always parse output for accurate counts, as some frameworks exit 0 with skipped tests.
+
+---
+
+## Error Handling
+
+### Test Framework Not Installed
+
+If the test command fails with "command not found":
+
+```
+Question: "Test framework not installed. What should I do?"
+Options:
+  - Show installation instructions
+  - Try a different test command
+  - Cancel
+```
+
+**Installation commands by framework:**
+- Jest/Node: `npm install --save-dev jest`
+- pytest: `pip install pytest`
+- Go: Built-in, check `go` installation
+- Rust: Built-in with `cargo`
+- RSpec: `bundle install` or `gem install rspec`
+
+### No Tests Found
+
+If tests run but find no test files:
+
+```
+No tests found. Checked:
+- [list of paths searched based on framework conventions]
+
+Question: "No tests found. What should I do?"
+Options:
+  - Specify test file/directory
+  - Check different location
+  - Cancel
+```
+
+### Tests Timeout
+
+If tests run longer than 5 minutes without completing:
+
+```
+Warning: Tests have been running for over 5 minutes.
+
+Question: "Tests are taking a long time. How should I proceed?"
+Options:
+  - Continue waiting
+  - Stop tests and show partial results
+  - Run with --bail/fail-fast flag
+  - Cancel
+```
+
+### Missing Dependencies
+
+If tests fail due to missing dependencies:
+
+```
+Tests failed due to missing dependencies.
+
+Error: [error message]
+
+Question: "Dependencies may not be installed. What should I do?"
+Options:
+  - Run install command (npm install, pip install, etc.)
+  - Continue anyway
+  - Cancel
+```
+
+### Build/Compilation Failure
+
+If tests fail before running due to build errors:
+
+```
+## Build Failed
+
+Cannot run tests - compilation errors occurred.
+
+[Build error output]
+
+Fix the build errors first, then run `/run-tests` again.
+```
+
+---
+
+## Project Root Detection
+
+Project root is determined by (in order):
+1. Directory containing the detected project file (package.json, pyproject.toml, etc.)
+2. Git repository root (`git rev-parse --show-toplevel`)
+3. Current working directory
+
+---
 
 ## Examples
 

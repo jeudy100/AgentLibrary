@@ -38,14 +38,32 @@ From the Explore results, extract:
 
 ### Step 2: Perform Commit
 
-Follow the `/commit` skill workflow:
+Execute the commit phase inline (detailed in `/commit` skill):
 
-1. Gather git state (staged, unstaged, untracked)
-2. Stage changes (interactive or all with `--all`)
-3. Generate commit message (conventional commit format)
-4. Create commit
+1. **Gather git state**:
+   ```bash
+   git diff --cached --name-status
+   git diff --name-status
+   git ls-files --others --exclude-standard
+   ```
 
-See `/commit` skill for detailed commit instructions.
+2. **Stage changes**: If `--all` flag: `git add -A`. Otherwise prompt user for which files to stage.
+
+3. **Generate commit message**: Follow conventional commit format from project context.
+
+4. **Create commit**:
+   ```bash
+   git commit -m "$(cat <<'EOF'
+   <type>(<scope>): <subject>
+
+   <body>
+
+   Co-Authored-By: Claude <noreply@anthropic.com>
+   EOF
+   )"
+   ```
+
+> **Note:** The `/commit` skill file contains additional detail on message generation and edge cases.
 
 ### Step 3: Check Remote State
 
@@ -67,18 +85,13 @@ git fetch origin
 git status -sb
 ```
 
-### Step 3.5: Check Default Branch
+### Step 4: Check Default Branch
 
 Detect if on the default branch and prompt the user:
 
 ```bash
-# Get current branch
-CURRENT_BRANCH=$(git branch --show-current)
-
-# Check if it's a default branch
-if [ "$CURRENT_BRANCH" = "main" ] || [ "$CURRENT_BRANCH" = "master" ]; then
-  echo "ON_DEFAULT_BRANCH"
-fi
+# Check if on default branch (single command to handle shell state limitations)
+git branch --show-current | grep -E "^(main|master)$" && echo "ON_DEFAULT_BRANCH" || echo "NOT_DEFAULT_BRANCH"
 ```
 
 **If on default branch, ALWAYS ask:**
@@ -96,9 +109,9 @@ Options:
 **If user chooses "Create a new branch":**
 1. Prompt for branch name
 2. Create the branch: `git checkout -b <new-branch-name>`
-3. Continue with push workflow (Step 4)
+3. Continue with push workflow (Step 5)
 
-### Step 4: Push to Remote
+### Step 5: Push to Remote
 
 **New Branch (no upstream):**
 ```bash
@@ -116,7 +129,7 @@ git push
 git push --force-with-lease
 ```
 
-### Step 5: Verify Push
+### Step 6: Verify Push
 
 ```bash
 # Confirm push succeeded
@@ -243,7 +256,28 @@ Options:
 
 ### No Changes to Commit
 
-Same as `/commit` skill - see error handling there.
+If there are no changes to commit:
+
+```
+No changes to commit. Working directory is clean.
+
+To make changes:
+1. Edit files in the project
+2. Run `/commit-push` again
+```
+
+### Detached HEAD State
+
+If in detached HEAD state:
+
+```
+Warning: You are in detached HEAD state. Cannot push without a branch.
+
+Question: "How would you like to proceed?"
+Options:
+  - Create a new branch from current HEAD
+  - Cancel
+```
 
 ---
 
@@ -275,7 +309,7 @@ Options:
 
 ### Protected Branch Detection
 
-Check for common protected branch names (excluding main/master which always prompt in Step 3.5):
+Check for common protected branch names (excluding main/master which always prompt in Step 4):
 - `develop`
 - `release/*`
 - `production`

@@ -44,17 +44,24 @@ Use project conventions to inform PR title style and description format.
 # Current branch
 git branch --show-current
 
-# Default branch
-git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+# Default branch (cross-platform, works on Windows)
+# Prefer using gh CLI since it's already required for this skill
+gh repo view --json defaultBranchRef --jq ".defaultBranchRef.name"
 
-# Commits to include
-git log origin/main..HEAD --oneline
+# Fallback if gh fails:
+git config --get init.defaultBranch || echo "main"
+
+# Store default branch for subsequent commands
+DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq ".defaultBranchRef.name" 2>/dev/null || echo "main")
+
+# Commits to include (use detected default branch)
+git log origin/${DEFAULT_BRANCH}..HEAD --oneline
 
 # Changed files
-git diff origin/main..HEAD --name-only
+git diff origin/${DEFAULT_BRANCH}..HEAD --name-only
 
 # Full diff
-git diff origin/main..HEAD --stat
+git diff origin/${DEFAULT_BRANCH}..HEAD --stat
 ```
 
 ### Step 3: Analyze Changes
@@ -283,6 +290,29 @@ Options:
 
 **Tip:** Use `/commit-push` to commit and push changes in one step before creating a PR.
 
+### PR Already Exists
+
+If a PR already exists for the current branch:
+
+```
+Question: "A PR already exists for branch '[name]' (#123). What should I do?"
+Options:
+  - View the existing PR
+  - Update the existing PR description
+  - Cancel
+```
+
+### On Default Branch
+
+If the current branch is the default branch (main/master):
+
+```
+Question: "You're on the default branch '[name]'. PRs should be created from feature branches. What would you like to do?"
+Options:
+  - Create a new feature branch first
+  - Cancel
+```
+
 ---
 
 ## Best Practices
@@ -315,7 +345,20 @@ Changes
 
 ## Templates
 
-Check for `.github/PULL_REQUEST_TEMPLATE.md` and follow the project's template if it exists.
+Check for project PR templates:
+
+```bash
+# Check for PR template (common locations)
+ls .github/PULL_REQUEST_TEMPLATE.md 2>/dev/null || \
+ls .github/pull_request_template.md 2>/dev/null || \
+ls docs/PULL_REQUEST_TEMPLATE.md 2>/dev/null || \
+echo "No template found"
+```
+
+If a template exists:
+1. Read the template file
+2. Fill in the template sections instead of using the default format
+3. Preserve any required sections or checkboxes from the template
 
 ## Related Skills
 

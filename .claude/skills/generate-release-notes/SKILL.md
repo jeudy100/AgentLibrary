@@ -34,6 +34,21 @@ From the Explore results, extract:
 - Release conventions
 - Changelog format (if specified in CLAUDE.md)
 
+### Step 1.5: Verify Git Repository
+
+First, verify this is a git repository:
+
+```bash
+git rev-parse --is-inside-work-tree 2>/dev/null || echo "NOT_A_GIT_REPO"
+```
+
+If not a git repository:
+```
+Error: This directory is not a git repository.
+
+Cannot generate release notes without git history.
+```
+
 ### Step 2: Determine Version Range
 
 ```bash
@@ -81,7 +96,10 @@ Parse conventional commits into categories:
 Look for:
 - `BREAKING CHANGE:` in commit body
 - `!` after type (e.g., `feat!:`)
-- Commits that modify public APIs
+- Commit messages containing: "remove", "rename", "change signature", "incompatible", "deprecate"
+- Commits modifying public APIs (files in `api/`, `public/`, exported functions)
+
+**Note:** When uncertain whether a change is breaking, err on the side of caution and include it in Breaking Changes with a note asking the user to verify.
 
 ### Step 6: Generate Notes
 
@@ -93,6 +111,11 @@ Use this format:
 ## Highlights
 
 [1-2 sentence summary of the most important changes]
+
+**How to generate highlights:**
+1. Identify the 1-3 most impactful changes (prioritize: breaking changes > features > critical fixes)
+2. Write from the user's perspective - focus on benefits, not implementation
+3. Example: "This release adds multi-factor authentication and fixes a critical bug that caused data loss during exports."
 
 ## Breaking Changes
 
@@ -127,9 +150,33 @@ Use this format:
 - @username
 - @username
 
+**Extracting contributors:**
+```bash
+git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%an|%ae" | sort -u
+```
+
+**Formatting:**
+- If email contains `@users.noreply.github.com`, extract username from email prefix
+- Otherwise, list as "Name" without @ prefix
+- If GitHub usernames cannot be determined, omit the @ prefix
+
 ---
 
 **Full Changelog**: [link to compare]
+
+**Constructing the compare URL:**
+
+Detect the remote URL:
+```bash
+git remote get-url origin
+```
+
+Then construct the appropriate URL:
+- **GitHub**: `https://github.com/owner/repo/compare/v1.0.0...v2.0.0`
+- **GitLab**: `https://gitlab.com/owner/repo/-/compare/v1.0.0...v2.0.0`
+- **Bitbucket**: `https://bitbucket.org/owner/repo/branches/compare/v2.0.0..v1.0.0`
+
+If the remote URL format is unrecognized, omit the Full Changelog link.
 ```
 
 ### Step 7: Output

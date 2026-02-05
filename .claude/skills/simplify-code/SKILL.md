@@ -17,7 +17,7 @@ Analyzes recent changes or discussed files by default. You can also specify:
 
 ### Step 1: Discover Project Context
 
-Use the **Explore** agent to discover project context:
+Use the **Explore** agent (via Task tool with subagent_type="Explore") to discover project context:
 
 **Explore Prompt:**
 > Discover project context for simplifying code. Find and read:
@@ -32,6 +32,8 @@ From the Explore results, extract:
 - Project type and language
 - Coding conventions and patterns
 - Any simplification guidelines from CLAUDE.md
+
+If Explore returns no context, proceed with language-agnostic analysis using general best practices.
 
 ### Step 2: Identify Target Code
 
@@ -49,8 +51,10 @@ git diff --name-only
 ```
 
 **If no specific target:**
-- Analyze source files in the project
-- Skip test files, generated files, node_modules, vendor, etc.
+- Identify source directories: `src/`, `lib/`, `app/`, or language-specific conventions
+- Use Glob to find source files: `**/*.ts`, `**/*.py`, etc. based on project type
+- Exclude patterns: `**/node_modules/**`, `**/vendor/**`, `**/*.test.*`, `**/*.spec.*`, `**/dist/**`, `**/build/**`
+- Skip test files, generated files, lock files
 
 ### Step 3: Analyze for Complexity Issues
 
@@ -434,6 +438,59 @@ Only apply changes that are:
 - Run tests after any changes
 - Review changes before committing
 - Consider impact on team/codebase conventions
+
+---
+
+---
+
+## Scope Limits
+
+**Maximum files per run:**
+- If the target contains more than 50 files, prioritize recently modified files (if git available)
+- Limit initial analysis to 20 files
+- Report: "Analyzed X of Y files. Run with specific paths for complete analysis."
+
+---
+
+## Error Handling
+
+### No Files Found
+
+If no analyzable files are found:
+```
+Question: "No source files found in the specified location. What should I do?"
+Options:
+  - Specify file paths explicitly
+  - Check a different directory
+  - Cancel
+```
+
+### Git Not Available
+
+If git commands fail (not a git repo):
+- Fall back to analyzing all source files in the provided path
+- Skip the "recent changes" detection
+- Note in report: "Git not available - analyzed all source files"
+
+### File Read Errors
+
+If some files cannot be read:
+- Log the file path and error
+- Continue with remaining files
+- Include in report: "X files could not be analyzed due to access errors"
+
+### Analysis Timeout
+
+If analysis exceeds 5 minutes:
+- Output partial results
+- Note: "Analysis incomplete - processed X of Y files"
+
+### Apply Mode Failures
+
+If a safe transformation fails when using `--apply`:
+- Skip and continue to next file
+- Report all failures at the end
+- Never leave files in a partially-modified state
 
 ---
 

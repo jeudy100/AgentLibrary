@@ -17,7 +17,7 @@ Reviews all uncommitted changes by default. You can also specify:
 
 ### Step 1: Discover Project Context
 
-Use the **Explore** agent to discover project context:
+Use the **Explore** agent (via Task tool with subagent_type="Explore") to discover project context:
 
 **Explore Prompt:**
 > Discover project context for reviewing code changes. Find and read:
@@ -36,7 +36,20 @@ From the Explore results, extract:
 
 Use the conventions from CLAUDE.md to inform what patterns to look for during review.
 
+If Explore returns no project-specific context, proceed with general best practices.
+
 ### Step 2: Gather Changes
+
+**Choose the appropriate command based on the request:**
+
+| User Request | Command |
+|--------------|---------|
+| Default (no flags) | `git diff HEAD` (all uncommitted) |
+| `--staged` | `git diff --cached` |
+| `--commit <sha>` | `git show <sha>` |
+| `--branch <name>` | `git diff <name>...HEAD` |
+
+If no arguments provided, use `git diff HEAD` to capture both staged and unstaged changes.
 
 ```bash
 # Get staged changes
@@ -63,7 +76,41 @@ git diff --name-status HEAD
 
 # Just file names
 git diff --name-only HEAD
+
+# Get diff stats for size assessment
+git diff --stat HEAD
 ```
+
+### Step 3.5: Handle Special Files
+
+**Skip these file types** (flag but don't analyze content):
+- Binary files (images, compiled assets)
+- Lock files (package-lock.json, yarn.lock, Cargo.lock, poetry.lock)
+- Generated files (*.min.js, dist/*, build/*, *.generated.*)
+
+**Check these carefully:**
+- `.env` files (should never contain real secrets in commits)
+- Config files (*.config.js, *.yaml, *.toml)
+- CI/CD files (.github/*, .gitlab-ci.yml, Jenkinsfile)
+- Security-sensitive files (auth/*, middleware/*, permissions/*)
+
+### Step 3.6: Handle Large Diffs
+
+If the diff exceeds 500 lines:
+
+1. **Summarize first**: List changed files with `git diff --stat HEAD`
+2. **Prioritize security**: Focus security checks on:
+   - New files
+   - Files with "auth", "login", "password", "api", "secret" in the name
+   - Config files (.env, *.config.*, etc.)
+3. **Sample review**: For very large diffs (>2000 lines), inform the user:
+   ```
+   This changeset is large (X files, Y lines). I'll focus on:
+   - All security-sensitive files
+   - A sample of other changes
+
+   For a complete review, consider breaking this into smaller commits.
+   ```
 
 ### Step 4: Analyze Changes
 
@@ -73,7 +120,7 @@ For each changed file, check for:
 - [ ] Debugging code left in (console.log, print, debugger)
 - [ ] Commented-out code
 - [ ] TODO/FIXME without ticket reference
-- [ ] Large functions (> 50 lines)
+- [ ] Large functions - If a diff hunk adds >30 lines to a single function, read the full file to check total function length (flag if > 50 lines)
 - [ ] Deep nesting (> 4 levels)
 - [ ] Magic numbers without constants
 - [ ] Duplicate code
