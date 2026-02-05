@@ -46,6 +46,7 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 | `/simplify-code` | Analyze code and suggest simplifications |
 | `/refine` | Analyze definition quality by name, suggest improvements |
 | `/skill-creator` | Create new skills with proper structure and best practices |
+| `/agent-creator` | Create new agents with proper structure and best practices |
 
 ### Git/Release Skills
 
@@ -146,6 +147,7 @@ All components are language-agnostic. They detect project type from:
     simplify-code/SKILL.md
     refine/SKILL.md
     skill-creator/SKILL.md
+    agent-creator/SKILL.md
     commit/SKILL.md
     commit-push/SKILL.md
     review-changes/SKILL.md
