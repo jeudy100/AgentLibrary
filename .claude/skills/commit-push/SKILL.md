@@ -67,6 +67,37 @@ git fetch origin
 git status -sb
 ```
 
+### Step 3.5: Check Default Branch
+
+Detect if on the default branch and prompt the user:
+
+```bash
+# Get current branch
+CURRENT_BRANCH=$(git branch --show-current)
+
+# Check if it's a default branch
+if [ "$CURRENT_BRANCH" = "main" ] || [ "$CURRENT_BRANCH" = "master" ]; then
+  echo "ON_DEFAULT_BRANCH"
+fi
+```
+
+**If on default branch, ALWAYS ask:**
+
+```
+You are about to push to the default branch '[branch]'.
+
+Question: "Would you like to push directly to [branch] or create a new branch?"
+Options:
+  - Push directly to [branch]
+  - Create a new branch (will prompt for branch name)
+  - Cancel
+```
+
+**If user chooses "Create a new branch":**
+1. Prompt for branch name
+2. Create the branch: `git checkout -b <new-branch-name>`
+3. Continue with push workflow (Step 4)
+
 ### Step 4: Push to Remote
 
 **New Branch (no upstream):**
@@ -148,7 +179,7 @@ git remote add origin <url>
 
 ### Protected Branch
 
-If pushing to a protected branch (main, master, develop):
+For branches other than main/master (which are handled in Step 3.5), if pushing to other protected branches (develop, release/*, production):
 
 ```
 Warning: You are about to push directly to '[branch]'.
@@ -244,9 +275,7 @@ Options:
 
 ### Protected Branch Detection
 
-Check for common protected branch names:
-- `main`
-- `master`
+Check for common protected branch names (excluding main/master which always prompt in Step 3.5):
 - `develop`
 - `release/*`
 - `production`
