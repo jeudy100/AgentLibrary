@@ -22,7 +22,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 | `code-architect` | Analyzes architecture, detects anti-patterns, evaluates design |
 | `build-validator` | Validates builds, checks dependencies, runs quality gates |
 | `refiner` | Discovers and analyzes agent/skill definitions by name |
-| `context-generator` | Explores codebase and generates modular context documentation |
+| `context-generator` | Generates hybrid context docs (central overviews + colocated details) for all detected tools/frameworks |
 | `dependency-manager` | Audits, updates, and manages project dependencies safely |
 
 ### Using Agents
@@ -54,6 +54,7 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 | `/test-generator` | Generate unit test stubs from code analysis |
 | `/env-manager` | Validate and manage .env files and environment variables |
 | `/api-documenter` | Generate API documentation (OpenAPI, JSDoc, docstrings) |
+| `/validate-context` | Validate context structure for autodiscovery |
 
 ### Git/Release Skills
 
@@ -169,6 +170,7 @@ All components are language-agnostic. They detect project type from:
     env-manager/SKILL.md
     api-documenter/SKILL.md
     adr-generator/SKILL.md
+    validate-context/SKILL.md
 ```
 
 ## File Storage Rules
