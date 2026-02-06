@@ -24,6 +24,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 | `refiner` | Discovers and analyzes agent/skill definitions by name |
 | `context-generator` | Generates hybrid context docs (central overviews + colocated details) for all detected tools/frameworks |
 | `dependency-manager` | Audits, updates, and manages project dependencies safely |
+| `project-setup` | Initializes project foundations: git, testing, linting, CI/CD, documentation |
 
 ### Using Agents
 
@@ -35,6 +36,7 @@ Agents are invoked via the Task tool with the agent name:
 - "Use build-validator to check if my code is ready to merge"
 - "Use context-generator to document this codebase"
 - "Use dependency-manager to audit and update dependencies"
+- "Use project-setup to initialize a new project"
 
 ## Skills
 
@@ -152,6 +154,7 @@ All components are language-agnostic. They detect project type from:
     refiner.md
     context-generator.md
     dependency-manager.md
+    project-setup.md
   skills/
     run-tests/SKILL.md
     lint-code/SKILL.md

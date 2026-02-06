@@ -458,3 +458,192 @@ Options:
 | "Add [tool]" | Add context for newly added tool |
 | "Minimal" | Root CLAUDE.md only |
 | "Full" | Maximum detail, split into multiple files |
+| "Setup" | Project overview + colocated context evaluation (for project-setup agent) |
+
+## Setup Mode (Project Initialization)
+
+When invoked with "setup" scope (typically by the project-setup agent), follow this specialized workflow:
+
+### Setup Step 1: Generate Project Overview
+
+Create root `CLAUDE.md` with a generic project overview:
+
+```markdown
+# [Project Name]
+
+[Brief description derived from README.md, package.json description, or directory analysis]
+
+## Project Structure
+
+| Directory | Purpose |
+|-----------|---------|
+| [detected dirs] | [inferred purpose] |
+
+## Development
+
+### Prerequisites
+- [detected runtime/language] [version if found]
+- [detected package manager]
+
+### Setup
+```bash
+[install command based on project type]
+```
+
+### Commands
+
+| Action | Command |
+|--------|---------|
+| Install | `[command]` |
+| Test | `[command]` |
+| Lint | `[command]` |
+| Build | `[command]` |
+| Start | `[command]` |
+
+## Code Style
+[Inferred from linter config or defaults for project type]
+
+## Testing
+[Inferred from test framework config]
+
+## Additional Context
+[Links to category-specific context if generated]
+```
+
+### Setup Step 2: Evaluate Colocated Context Needs
+
+Analyze the codebase to determine if colocated CLAUDE.md files would be beneficial.
+
+**Criteria for Colocated Context:**
+
+| Criterion | Threshold | Example |
+|-----------|-----------|---------|
+| Directory depth | 3+ levels of meaningful structure | `src/features/auth/` |
+| Component isolation | Self-contained modules | `packages/api/`, `apps/web/` |
+| Complex subdirectory | Has own config files | `src/database/` with migrations |
+| Team boundaries | Different ownership areas | `frontend/`, `backend/` |
+| Domain complexity | Distinct business domains | `src/billing/`, `src/inventory/` |
+
+**Scan for colocated candidates:**
+
+```
+# Look for directories that suggest independent components
+**/src/*/
+**/packages/*/
+**/apps/*/
+**/services/*/
+**/modules/*/
+**/features/*/
+**/lib/*/
+**/components/*/       # Only if complex (subdirs with logic)
+```
+
+For each candidate directory, check:
+1. Does it have its own config files? (tsconfig.json, package.json, etc.)
+2. Does it have 5+ files with meaningful code?
+3. Does it represent a distinct domain or feature?
+4. Would a developer working here benefit from local context?
+
+### Setup Step 3: Recommend Colocated Structure
+
+Present findings to user:
+
+```markdown
+## Colocated Context Recommendation
+
+Based on codebase analysis:
+
+### Recommended for Colocated CLAUDE.md
+
+| Directory | Reason | Suggested Content |
+|-----------|--------|-------------------|
+| `src/auth/` | Self-contained auth module | Auth patterns, security notes |
+| `packages/api/` | Independent package | API conventions, endpoints |
+
+### Not Recommended
+
+| Directory | Reason |
+|-----------|--------|
+| `src/utils/` | Simple utility functions, central docs sufficient |
+| `src/types/` | Type definitions only, no behavioral context needed |
+
+### Proceed with colocated context?
+```
+
+**Options:**
+- Create all recommended colocated files
+- Select specific directories
+- Skip colocated context (central only)
+- Customize recommendations
+
+### Setup Step 4: Generate Colocated Files
+
+For approved directories, create `[directory]/CLAUDE.md`:
+
+```markdown
+# [Directory Name]
+
+> [Brief description of this module/component]
+
+## Purpose
+
+[What this code does and why it exists]
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| [main files] | [description] |
+
+## Patterns
+
+[Coding patterns specific to this area]
+
+## Dependencies
+
+[Internal and external dependencies]
+
+## Related Context
+
+- [Link to central context](../../docs/[category]/CLAUDE.md)
+```
+
+### Setup Output Format
+
+```markdown
+## Context Setup Complete
+
+**Project**: [name]
+**Mode**: Setup (project initialization)
+
+### Root Context
+
+| File | Status |
+|------|--------|
+| CLAUDE.md | [Created/Updated] |
+
+### Central Context
+
+| Category | Path | Status |
+|----------|------|--------|
+| [category] | [path] | [Created/Skipped] |
+
+### Colocated Context
+
+| Directory | Path | Reason |
+|-----------|------|--------|
+| [dir] | [path]/CLAUDE.md | [reason for inclusion] |
+
+### Skipped (Not Recommended)
+
+| Directory | Reason |
+|-----------|--------|
+| [dir] | [reason] |
+
+---
+
+**Next Steps:**
+1. Review generated CLAUDE.md files
+2. Add project-specific instructions
+3. Run `/validate-context` to verify structure
+```
