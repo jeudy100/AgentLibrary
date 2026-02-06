@@ -23,6 +23,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 | `build-validator` | Validates builds, checks dependencies, runs quality gates |
 | `refiner` | Discovers and analyzes agent/skill definitions by name |
 | `context-generator` | Explores codebase and generates modular context documentation |
+| `dependency-manager` | Audits, updates, and manages project dependencies safely |
 
 ### Using Agents
 
@@ -33,6 +34,7 @@ Agents are invoked via the Task tool with the agent name:
 - "Use code-architect to review the architecture"
 - "Use build-validator to check if my code is ready to merge"
 - "Use context-generator to document this codebase"
+- "Use dependency-manager to audit and update dependencies"
 
 ## Skills
 
@@ -49,6 +51,9 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 | `/refine` | Analyze definition quality by name, suggest improvements |
 | `/skill-creator` | Create new skills with proper structure and best practices |
 | `/agent-creator` | Create new agents with proper structure and best practices |
+| `/test-generator` | Generate unit test stubs from code analysis |
+| `/env-manager` | Validate and manage .env files and environment variables |
+| `/api-documenter` | Generate API documentation (OpenAPI, JSDoc, docstrings) |
 
 ### Git/Release Skills
 
@@ -59,6 +64,8 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 | `/review-changes` | Review staged/unstaged git changes |
 | `/create-pr` | Create well-formatted pull requests |
 | `/generate-release-notes` | Generate release notes from commits |
+| `/git-workflow` | Advanced git operations (cherry-pick, rebase, squash, bisect) |
+| `/adr-generator` | Create and manage Architecture Decision Records |
 
 ## Context System
 
@@ -143,6 +150,7 @@ All components are language-agnostic. They detect project type from:
     build-validator.md
     refiner.md
     context-generator.md
+    dependency-manager.md
   skills/
     run-tests/SKILL.md
     lint-code/SKILL.md
@@ -156,6 +164,11 @@ All components are language-agnostic. They detect project type from:
     review-changes/SKILL.md
     create-pr/SKILL.md
     generate-release-notes/SKILL.md
+    test-generator/SKILL.md
+    git-workflow/SKILL.md
+    env-manager/SKILL.md
+    api-documenter/SKILL.md
+    adr-generator/SKILL.md
 ```
 
 ## File Storage Rules
