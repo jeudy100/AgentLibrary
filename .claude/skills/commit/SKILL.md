@@ -115,7 +115,7 @@ Otherwise, analyze staged changes and generate a conventional commit message:
 | `revert` | Reverting a previous commit |
 
 **Breaking Changes:**
-- Use `!` after type/scope for breaking changes: `feat!: remove deprecated API`
+- Append an exclamation mark after the type/scope to indicate breaking changes (e.g., `feat!: remove deprecated API`)
 - Or add footer: `BREAKING CHANGE: <description>`
 
 Examples:
