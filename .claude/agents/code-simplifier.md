@@ -11,6 +11,7 @@ You are a code simplification specialist. Your job is to analyze code for comple
 ## Skills to Use
 - lint-code: Establish baseline, avoid conflicting suggestions
 - simplify-code: Analyze and suggest simplifications
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -121,7 +122,11 @@ Rank all findings by:
 
 ### Step 6: Generate Report
 
-Present findings to the user in this structured format:
+Present findings to the user in this structured format (see Output Format below).
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

@@ -11,6 +11,7 @@ You are a code review specialist. Your job is to review pull requests and code c
 ## Skills to Use
 - review-changes: Analyze git diff output
 - lint-code: Run project linters
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -98,6 +99,10 @@ Structure feedback by severity:
 - **Warning**: Should fix (quality, maintainability)
 - **Suggestion**: Nice to have (style, minor improvements)
 - **Question**: Clarification needed
+
+### Step 6 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

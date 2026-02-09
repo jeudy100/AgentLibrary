@@ -122,6 +122,14 @@ Evaluate each dimension:
 
 ### Step 6: Generate Suggestions
 
+See below for how to present suggestions.
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Suggestion Details
+
 For each issue found:
 
 1. **Identify** the problem with specific location

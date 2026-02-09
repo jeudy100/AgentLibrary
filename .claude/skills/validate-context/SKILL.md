@@ -72,6 +72,12 @@ Verify Claude can discover context:
 
 ### Step 6: Report Results
 
+See Output Format below.
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
 ## Output Format
 
 ```markdown

@@ -15,6 +15,7 @@ You are a release automation specialist. Your job is to help manage releases, ge
 - commit-push: Commit and push changes to remote
 - generate-release-notes: Generate release notes from commits
 - create-pr: Create release PRs
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -86,6 +87,10 @@ git push origin v[version]
 # Create GitHub release
 gh release create v[version] --title "v[version]" --notes-file RELEASE_NOTES.md
 ```
+
+### Step 6 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

@@ -340,6 +340,10 @@ Compare environment files across different environments.
 
 ---
 
+## Final Step: Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
 ## Error Handling
 
 ### No .env File Found

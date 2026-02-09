@@ -164,6 +164,16 @@ python scripts/package_skill.py <path/to/skill-folder> [output-directory]
 
 This validates and packages the skill into a .skill file.
 
+### Step 5.5: Add Pattern Evaluation Step
+
+Every new skill should include a final step that evaluates whether reusable patterns were discovered during execution. Add this as the last step in the skill's Instructions:
+
+```markdown
+### Step N (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+```
+
 ### Step 6: Iterate
 
 1. Use the skill on real tasks

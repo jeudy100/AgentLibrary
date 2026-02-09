@@ -68,6 +68,7 @@ Every agent is a single markdown file in `.claude/agents/`:
 
 ## Skills to Use
 - [skill-name]: [When to use it]
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -79,6 +80,10 @@ Every agent is a single markdown file in `.claude/agents/`:
 
 ### Step N: [Final Action]
 [Clear instructions]
+
+### Step N+1 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 [Template showing expected output structure]
@@ -298,6 +303,10 @@ Options:
   - Continue without backup
   - Modify migration to be non-destructive
   - Cancel
+
+### Step 5 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Important Notes
 

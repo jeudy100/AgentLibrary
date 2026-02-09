@@ -25,6 +25,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 | `context-generator` | Generates hybrid context docs (central overviews + colocated details) for all detected tools/frameworks |
 | `dependency-manager` | Audits, updates, and manages project dependencies safely |
 | `project-setup` | Initializes project foundations: git, testing, linting, CI/CD, documentation |
+| `pattern-evaluator` | Evaluates and persists reusable patterns (rules, skills, agents) discovered during sessions |
 
 ### Using Agents
 
@@ -37,6 +38,7 @@ Agents are invoked via the Task tool with the agent name:
 - "Use context-generator to document this codebase"
 - "Use dependency-manager to audit and update dependencies"
 - "Use project-setup to initialize a new project"
+- "Use pattern-evaluator to assess reusable patterns from this session"
 
 ## Skills
 
@@ -57,6 +59,7 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 | `/env-manager` | Validate and manage .env files and environment variables |
 | `/api-documenter` | Generate API documentation (OpenAPI, JSDoc, docstrings) |
 | `/validate-context` | Validate context structure for autodiscovery |
+| `/rule-creator` | Create project rules that auto-load into Claude's context |
 
 ### Git/Release Skills
 
@@ -155,6 +158,7 @@ All components are language-agnostic. They detect project type from:
     context-generator.md
     dependency-manager.md
     project-setup.md
+    pattern-evaluator.md
   skills/
     run-tests/SKILL.md
     lint-code/SKILL.md
@@ -174,6 +178,9 @@ All components are language-agnostic. They detect project type from:
     api-documenter/SKILL.md
     adr-generator/SKILL.md
     validate-context/SKILL.md
+    rule-creator/SKILL.md
+  rules/
+    .gitkeep
 ```
 
 ## File Storage Rules

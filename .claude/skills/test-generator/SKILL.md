@@ -248,6 +248,14 @@ Generate tests for:
 
 ### Step 6: Output Generated Tests
 
+Present tests with (see Output Format below).
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Output Details
+
 Present tests with:
 1. File path where test should be saved
 2. Complete test code

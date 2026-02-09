@@ -163,6 +163,14 @@ Apply thresholds based on code type (see Coverage Thresholds section):
 
 ### Step 5: Report Results
 
+Output in this format (see below).
+
+### Step 6 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Report Format
+
 Output in this format:
 
 ```

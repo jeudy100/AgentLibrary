@@ -310,6 +310,14 @@ Categorize issues by:
 
 ### Step 6: Generate Report
 
+Output findings in this format (see below).
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Report Format
+
 Output findings in this format:
 
 ```markdown

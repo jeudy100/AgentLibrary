@@ -181,6 +181,14 @@ If the remote URL format is unrecognized, omit the Full Changelog link.
 
 ### Step 7: Output
 
+Provide the release notes in markdown format, ready to (see Output Format below).
+
+### Step 8 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Output Details
+
 Provide the release notes in markdown format, ready to:
 1. Copy to CHANGELOG.md
 2. Use in GitHub release

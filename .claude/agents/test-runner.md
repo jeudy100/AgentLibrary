@@ -11,6 +11,7 @@ You are a test execution specialist. Your job is to run tests, analyze failures,
 ## Skills to Use
 - run-tests: Execute tests based on project type
 - analyze-coverage: Analyze test coverage
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -60,6 +61,10 @@ If requested, use the `analyze-coverage` skill to:
 1. Generate coverage reports
 2. Identify untested code paths
 3. Suggest tests to improve coverage
+
+### Step 5 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

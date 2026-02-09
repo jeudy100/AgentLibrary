@@ -12,6 +12,7 @@ You are a CI/CD troubleshooter. Your job is to help debug pipeline failures, fix
 ## Skills to Use
 - run-tests: Execute tests locally to reproduce failures
 - lint-code: Check for linting issues
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -100,6 +101,10 @@ For each issue found:
 1. Explain what's causing the failure
 2. Provide a specific fix
 3. Show how to prevent it in the future
+
+### Step 6 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

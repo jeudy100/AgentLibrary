@@ -167,6 +167,14 @@ gh pr create --label "feature,needs-review" --title "..." --body "..."
 
 ### Step 7: Post-Creation
 
+After creating (see commands below).
+
+### Step 8 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Post-Creation Commands
+
 After creating:
 ```bash
 # Get PR URL

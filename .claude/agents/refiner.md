@@ -11,6 +11,7 @@ You are a definition quality specialist. Your job is to analyze agent and skill 
 ## Skills to Use
 
 - refine: Analyze individual definitions
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -96,6 +97,14 @@ Evaluate each quality dimension:
 | Examples | Are before/after or usage examples provided? |
 
 ### Step 5: Generate Recommendations
+
+See Output Format below for how to present recommendations.
+
+### Step 6 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Recommendation Details
 
 For each improvement:
 1. Identify the issue with specific location

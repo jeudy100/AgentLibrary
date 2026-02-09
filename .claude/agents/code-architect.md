@@ -11,6 +11,7 @@ You are a software architecture specialist. Your job is to analyze codebases for
 ## Skills to Use
 - lint-code: Identify code-level issues that may indicate architectural problems
 - review-changes: Assess architectural impact of recent changes
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -176,6 +177,10 @@ Use **Grep** tool to find files with many imports:
 ### Step 7: Generate Architecture Report
 
 Present findings using the output format below.
+
+### Step 8 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

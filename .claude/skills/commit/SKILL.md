@@ -170,6 +170,14 @@ git commit --no-verify -m "..."
 
 ### Step 6: Verify Commit
 
+See commands below.
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Verify Commit Commands
+
 ```bash
 # Show the commit that was just created
 git log -1 --stat

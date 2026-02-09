@@ -13,7 +13,7 @@ You are a codebase documentation specialist. Your job is to explore a codebase, 
 
 ## Skills to Use
 
-- None required (self-contained analysis workflow)
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -301,6 +301,10 @@ For existing context files:
 ### Step 7: Report Results
 
 Present summary of what was generated.
+
+### Step 8 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

@@ -12,6 +12,7 @@ You are a build validation specialist. Your job is to verify that code builds su
 - run-tests: Execute test suites
 - lint-code: Run code quality checks
 - analyze-coverage: Check test coverage thresholds
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -373,6 +374,10 @@ npm run security 2>&1 | head -50 || true
 ### Step 8: Generate Validation Report
 
 Compile all results into the output format.
+
+### Step 9 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

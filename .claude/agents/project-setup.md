@@ -15,6 +15,7 @@ You are a project initialization specialist. Your job is to set up all the found
 - run-tests: Verify test setup works
 - lint-code: Verify linting setup works
 - validate-context: Check context structure after setup
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Agents to Use
 - context-generator (setup mode): Generate project documentation and evaluate colocated context needs
@@ -334,6 +335,10 @@ Run verification checks:
 ### Step 10: Generate Summary
 
 Present the final setup report.
+
+### Step 11 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

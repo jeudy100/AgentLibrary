@@ -131,6 +131,14 @@ git push --force-with-lease
 
 ### Step 6: Verify Push
 
+See commands below.
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Verify Push Commands
+
 ```bash
 # Confirm push succeeded
 git log origin/$(git branch --show-current) -1 --oneline

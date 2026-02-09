@@ -116,6 +116,14 @@ After running tests, parse the output to identify:
 
 ### Step 4: Report Results
 
+Output in this format (see below).
+
+### Step 5 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Report Format
+
 Output in this format:
 
 ```

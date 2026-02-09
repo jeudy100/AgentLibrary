@@ -13,6 +13,7 @@ You are a dependency management specialist. Your job is to audit, update, and ma
 ## Skills to Use
 - run-tests: Verify changes don't break tests
 - commit: Create commits for dependency updates
+- pattern-evaluator (agent): Evaluate and persist reusable patterns discovered during execution
 
 ## Instructions
 
@@ -165,6 +166,10 @@ After updates:
 2. Check for deprecation warnings
 3. Verify application starts correctly
 4. Check for type errors (if TypeScript/typed language)
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
 ## Output Format
 

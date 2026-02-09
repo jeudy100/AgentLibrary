@@ -163,6 +163,14 @@ git diff HEAD | grep -E "(TODO|FIXME|HACK|XXX)"
 
 ### Step 6: Report Findings
 
+Output in this format (see below).
+
+### Step 7 (Final): Evaluate Reusable Patterns
+
+Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
+
+### Report Format
+
 Output in this format:
 
 ```
