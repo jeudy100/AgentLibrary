@@ -26,6 +26,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 | `dependency-manager` | Audits, updates, and manages project dependencies safely |
 | `project-setup` | Initializes project foundations: git, testing, linting, CI/CD, documentation |
 | `pattern-evaluator` | Evaluates and persists reusable patterns (rules, skills, agents) discovered during sessions |
+| `feature-implementer` | Implements features end-to-end: analyzes codebase, writes code, tests, validates, and updates context |
 
 ### Using Agents
 
@@ -39,6 +40,7 @@ Agents are invoked via the Task tool with the agent name:
 - "Use dependency-manager to audit and update dependencies"
 - "Use project-setup to initialize a new project"
 - "Use pattern-evaluator to assess reusable patterns from this session"
+- "Use feature-implementer to implement [feature description]"
 
 ## Skills
 
@@ -159,6 +161,7 @@ All components are language-agnostic. They detect project type from:
     dependency-manager.md
     project-setup.md
     pattern-evaluator.md
+    feature-implementer.md
   skills/
     run-tests/SKILL.md
     lint-code/SKILL.md
