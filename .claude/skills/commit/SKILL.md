@@ -16,27 +16,7 @@ Options:
 
 ## Instructions
 
-### Step 1: Discover Project Context
-
-Use the **Explore** agent (via Task tool with subagent_type="Explore") to discover project context:
-
-**Explore Prompt:**
-> Discover project context for creating commits. Find and read:
->
-> 1. **Root CLAUDE.md** - Read `CLAUDE.md` at project root. All instructions are MANDATORY.
-> 2. **Relevant CLAUDE.md Files** - Search `**/CLAUDE.md` for keywords: commit, conventional, git, branch, message
-> 3. **Project Type** - Detect from package.json, pyproject.toml, go.mod, Cargo.toml, etc.
->
-> Return: Commit conventions, message format, branch naming rules
-
-From the Explore results, extract:
-- Project type and tools
-- Commit message conventions
-- Any commit-specific instructions from CLAUDE.md
-
-If Explore returns no project-specific context, proceed with default conventional commit conventions.
-
-### Step 2: Gather Git State
+### Step 1: Gather Git State
 
 ```bash
 # Current branch
@@ -63,7 +43,7 @@ git log --oneline -5
 
 **Important:** Read the full `git diff --cached` output to understand what changed, not just which files. This is essential for generating accurate commit messages.
 
-### Step 3: Stage Changes
+### Step 2: Stage Changes
 
 If `--all` flag is used:
 ```bash
@@ -84,7 +64,7 @@ If staging specific files, use:
 git add <file1> <file2> ...
 ```
 
-### Step 4: Generate Commit Message
+### Step 3: Generate Commit Message
 
 If `--message` flag is provided, use the provided message.
 
@@ -148,7 +128,7 @@ accidental double-clicks from creating
 duplicate records.
 ```
 
-### Step 5: Create Commit
+### Step 4: Create Commit
 
 ```bash
 # Standard commit
@@ -168,7 +148,7 @@ git commit --amend -m "..."
 git commit --no-verify -m "..."
 ```
 
-### Step 6: Verify Commit
+### Step 5: Verify Commit
 
 See commands below.
 

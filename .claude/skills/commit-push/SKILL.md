@@ -17,55 +17,13 @@ Options:
 
 ## Instructions
 
-### Step 1: Discover Project Context
+### Step 1: Perform Commit
 
-Use the **Explore** agent to discover project context:
+Execute the commit phase using the `/commit` skill. This gathers git state, analyzes the diff, stages changes, generates the commit message, and creates the commit.
 
-**Explore Prompt:**
-> Discover project context for committing and pushing changes. Find and read:
->
-> 1. **Root CLAUDE.md** - Read `CLAUDE.md` at project root. All instructions are MANDATORY.
-> 2. **Relevant CLAUDE.md Files** - Search `**/CLAUDE.md` for keywords: commit, push, remote, branch, conventional, git
-> 3. **Project Type** - Detect from package.json, pyproject.toml, go.mod, Cargo.toml, etc.
->
-> Return: Commit conventions, push rules, protected branches, CI triggers
+> **Note:** The `/commit` skill file contains full detail on message generation and edge cases.
 
-From the Explore results, extract:
-- Project type and tools
-- Commit message conventions
-- Protected branch rules
-- Any push-specific instructions from CLAUDE.md
-
-### Step 2: Perform Commit
-
-Execute the commit phase inline (detailed in `/commit` skill):
-
-1. **Gather git state**:
-   ```bash
-   git diff --cached --name-status
-   git diff --name-status
-   git ls-files --others --exclude-standard
-   ```
-
-2. **Stage changes**: If `--all` flag: `git add -A`. Otherwise prompt user for which files to stage.
-
-3. **Generate commit message**: Follow conventional commit format from project context.
-
-4. **Create commit**:
-   ```bash
-   git commit -m "$(cat <<'EOF'
-   <type>(<scope>): <subject>
-
-   <body>
-
-   Co-Authored-By: Claude <noreply@anthropic.com>
-   EOF
-   )"
-   ```
-
-> **Note:** The `/commit` skill file contains additional detail on message generation and edge cases.
-
-### Step 3: Check Remote State
+### Step 2: Check Remote State
 
 ```bash
 # Check if remote exists
@@ -85,7 +43,7 @@ git fetch origin
 git status -sb
 ```
 
-### Step 4: Check Default Branch
+### Step 3: Check Default Branch
 
 Detect if on the default branch and prompt the user:
 
@@ -109,9 +67,9 @@ Options:
 **If user chooses "Create a new branch":**
 1. Prompt for branch name
 2. Create the branch: `git checkout -b <new-branch-name>`
-3. Continue with push workflow (Step 5)
+3. Continue with push workflow (Step 4)
 
-### Step 5: Push to Remote
+### Step 4: Push to Remote
 
 **New Branch (no upstream):**
 ```bash
@@ -129,11 +87,11 @@ git push
 git push --force-with-lease
 ```
 
-### Step 6: Verify Push
+### Step 5: Verify Push
 
 See commands below.
 
-### Step 7 (Final): Evaluate Reusable Patterns
+### Step 6 (Final): Evaluate Reusable Patterns
 
 Run the **pattern-evaluator** agent to assess whether any reusable patterns (rules, skills, or agents) were discovered during this session and should be persisted.
 
@@ -200,7 +158,7 @@ git remote add origin <url>
 
 ### Protected Branch
 
-For branches other than main/master (which are handled in Step 3.5), if pushing to other protected branches (develop, release/*, production):
+For branches other than main/master (which are handled in Step 3), if pushing to other protected branches (develop, release/*, production):
 
 ```
 Warning: You are about to push directly to '[branch]'.
