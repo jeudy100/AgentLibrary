@@ -1,3 +1,8 @@
+---
+name: commit-push
+description: Commit changes and push to remote in a single workflow.
+---
+
 # commit-push
 
 Commit changes and push to remote in a single workflow.

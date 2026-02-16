@@ -1,3 +1,8 @@
+---
+name: validate-context
+description: Validate that context documentation is properly structured for autodiscovery by Claude.
+---
+
 # Validate Context
 
 Validates that context documentation is properly structured for autodiscovery by Claude.

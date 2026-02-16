@@ -1,3 +1,8 @@
+---
+name: create-pr
+description: Create well-formatted pull requests with proper titles, descriptions, and metadata.
+---
+
 # create-pr
 
 Create well-formatted pull requests with proper titles, descriptions, and metadata.

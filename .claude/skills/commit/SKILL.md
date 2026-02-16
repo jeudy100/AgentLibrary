@@ -1,3 +1,8 @@
+---
+name: commit
+description: Create well-formatted commits following conventional commit standards.
+---
+
 # commit
 
 Create well-formatted commits following conventional commit standards.

@@ -1,3 +1,8 @@
+---
+name: adr-generator
+description: Create and manage Architecture Decision Records (ADRs). ADRs document important architectural decisions, their context, and consequences for future reference.
+---
+
 # adr-generator
 
 Create and manage Architecture Decision Records (ADRs). ADRs document important architectural decisions, their context, and consequences for future reference.

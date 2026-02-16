@@ -1,3 +1,8 @@
+---
+name: run-tests
+description: Execute tests based on project type. Uses centralized detection to determine the test framework and runs appropriate commands.
+---
+
 # run-tests
 
 Execute tests based on project type. Uses centralized detection to determine the test framework and runs appropriate commands.

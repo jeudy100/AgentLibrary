@@ -1,3 +1,8 @@
+---
+name: analyze-coverage
+description: Analyze test coverage reports and identify untested code paths. Uses centralized detection to determine the coverage tool.
+---
+
 # analyze-coverage
 
 Analyze test coverage reports and identify untested code paths. Uses centralized detection to determine the coverage tool.

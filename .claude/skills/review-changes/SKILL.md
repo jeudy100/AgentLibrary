@@ -1,3 +1,8 @@
+---
+name: review-changes
+description: Review staged and unstaged git changes, checking for common issues and providing feedback.
+---
+
 # review-changes
 
 Review staged and unstaged git changes, checking for common issues and providing feedback.

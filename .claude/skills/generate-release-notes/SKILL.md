@@ -1,3 +1,8 @@
+---
+name: generate-release-notes
+description: Generate release notes from git commits, grouped by type and formatted for release.
+---
+
 # generate-release-notes
 
 Generate release notes from git commits, grouped by type and formatted for release.

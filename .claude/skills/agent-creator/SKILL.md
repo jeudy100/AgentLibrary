@@ -59,6 +59,12 @@ Every agent is a single markdown file in `.claude/agents/`:
 ### Required Structure
 
 ```markdown
+---
+name: [agent-name]
+description: [1-2 sentence description of what this agent does]
+tools: [Tool1, Tool2, ...]
+---
+
 # [Agent Name] Agent
 
 [1-2 sentence description of what this agent does]
@@ -96,6 +102,8 @@ Run the **pattern-evaluator** agent to assess whether any reusable patterns (rul
 ```
 
 ### Section Guidelines
+
+**YAML Frontmatter** (required): Must include `name`, `description`, and `tools` fields. The `name` should be lowercase with hyphens. The `description` is used by Claude to determine when to delegate to this agent. The `tools` field lists the tools the agent can use.
 
 **Header**: 1-2 sentences describing the agent's purpose and expertise.
 
@@ -180,13 +188,14 @@ Outline:
 
 Create `.claude/agents/[agent-name].md`:
 
-1. Header with concise description
-2. Tools Available with purposes
-3. Skills to Use with triggers
-4. Instructions starting with Step 0
-5. Output Format with template
-6. Error Handling for each failure
-7. Important Notes for constraints
+1. YAML frontmatter with name, description, and tools
+2. Header with concise description
+3. Tools Available with purposes
+4. Skills to Use with triggers
+5. Instructions starting with Step 0
+6. Output Format with template
+7. Error Handling for each failure
+8. Important Notes for constraints
 
 **Writing Guidelines:**
 - Use imperative form ("Run tests", not "Running tests")
@@ -197,6 +206,7 @@ Create `.claude/agents/[agent-name].md`:
 ### Step 4: Validate
 
 Check for:
+- [ ] YAML frontmatter with name, description, and tools
 - [ ] Header with clear description
 - [ ] Tools Available section
 - [ ] Skills to Use section
@@ -216,6 +226,12 @@ Check for:
 ## Example Agent
 
 ```markdown
+---
+name: database-migration
+description: Creates, validates, and runs database migrations safely
+tools: Bash, Read, Write, Grep, Glob
+---
+
 # Database Migration Agent
 
 You are a database migration specialist. Your job is to create, validate, and run database migrations safely.

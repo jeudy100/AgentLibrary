@@ -1,3 +1,8 @@
+---
+name: api-documenter
+description: Generate API documentation from code analysis. Creates OpenAPI/Swagger specs, JSDoc, docstrings, and markdown documentation for REST APIs, GraphQL schemas, and library functions.
+---
+
 # api-documenter
 
 Generate API documentation from code analysis. Creates OpenAPI/Swagger specs, JSDoc, docstrings, and markdown documentation for REST APIs, GraphQL schemas, and library functions.

@@ -1,3 +1,8 @@
+---
+name: git-workflow
+description: Advanced git operations for complex version control tasks. Handles cherry-pick, rebase, squash, bisect, stash, and branch management.
+---
+
 # git-workflow
 
 Advanced git operations for complex version control tasks. Handles cherry-pick, rebase, squash, bisect, stash, and branch management.

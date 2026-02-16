@@ -1,3 +1,8 @@
+---
+name: simplify-code
+description: Analyze code for complexity and suggest simplifications. Detects verbose patterns, redundant logic, and opportunities for cleaner code.
+---
+
 # simplify-code
 
 Analyze code for complexity and suggest simplifications. Detects verbose patterns, redundant logic, and opportunities for cleaner code.

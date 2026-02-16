@@ -1,3 +1,8 @@
+---
+name: env-manager
+description: Manage environment variables and configuration files. Validates .env files, detects missing variables, generates templates, and ensures consistency across environments.
+---
+
 # env-manager
 
 Manage environment variables and configuration files. Validates .env files, detects missing variables, generates templates, and ensures consistency across environments.
