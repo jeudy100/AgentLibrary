@@ -1,6 +1,7 @@
 ---
 name: commit
 description: Create well-formatted commits following conventional commit standards.
+disable-model-invocation: true
 ---
 
 # commit

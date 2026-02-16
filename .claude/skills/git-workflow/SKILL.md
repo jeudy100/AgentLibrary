@@ -1,6 +1,8 @@
 ---
 name: git-workflow
 description: Advanced git operations for complex version control tasks. Handles cherry-pick, rebase, squash, bisect, stash, and branch management.
+argument-hint: "[operation] [options]"
+disable-model-invocation: true
 ---
 
 # git-workflow

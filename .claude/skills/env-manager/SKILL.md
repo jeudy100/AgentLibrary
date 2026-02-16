@@ -1,6 +1,7 @@
 ---
 name: env-manager
 description: Manage environment variables and configuration files. Validates .env files, detects missing variables, generates templates, and ensures consistency across environments.
+argument-hint: "[command]"
 ---
 
 # env-manager

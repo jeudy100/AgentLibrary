@@ -1,7 +1,7 @@
 ---
 name: context-generator
 description: Generates hybrid context docs (central overviews + colocated details) for all detected tools/frameworks
-tools: Read, Write, Edit, Grep, Glob, Bash
+tools: Read, Write, Edit, Grep, Glob, Bash, Task
 ---
 
 # Context Generator Agent

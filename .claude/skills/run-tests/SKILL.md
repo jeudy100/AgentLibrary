@@ -1,6 +1,7 @@
 ---
 name: run-tests
 description: Execute tests based on project type. Uses centralized detection to determine the test framework and runs appropriate commands.
+argument-hint: "[file-or-pattern]"
 ---
 
 # run-tests

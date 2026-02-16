@@ -63,6 +63,9 @@ Every agent is a single markdown file in `.claude/agents/`:
 name: [agent-name]
 description: [1-2 sentence description of what this agent does]
 tools: [Tool1, Tool2, ...]
+skills:
+  - [skill-name-1]
+  - [skill-name-2]
 ---
 
 # [Agent Name] Agent
@@ -103,7 +106,11 @@ Run the **pattern-evaluator** agent to assess whether any reusable patterns (rul
 
 ### Section Guidelines
 
-**YAML Frontmatter** (required): Must include `name`, `description`, and `tools` fields. The `name` should be lowercase with hyphens. The `description` is used by Claude to determine when to delegate to this agent. The `tools` field lists the tools the agent can use.
+**YAML Frontmatter** (required): Must include `name`, `description`, and `tools` fields. The `name` should be lowercase with hyphens. The `description` is used by Claude to determine when to delegate to this agent. The `tools` field lists the tools the agent can use. Optional fields:
+- `skills`: List of skill names to preload into the agent's context (e.g., `[run-tests, lint-code]`). Use this to give the agent access to skills referenced in "Skills to Use".
+- `model`: Override the default model (e.g., `sonnet`, `opus`, `haiku`).
+- `maxTurns`: Limit the number of agentic turns.
+- `permissionMode`: Set tool permission behavior.
 
 **Header**: 1-2 sentences describing the agent's purpose and expertise.
 
@@ -188,7 +195,7 @@ Outline:
 
 Create `.claude/agents/[agent-name].md`:
 
-1. YAML frontmatter with name, description, and tools
+1. YAML frontmatter with name, description, tools, and skills
 2. Header with concise description
 3. Tools Available with purposes
 4. Skills to Use with triggers
@@ -206,7 +213,7 @@ Create `.claude/agents/[agent-name].md`:
 ### Step 4: Validate
 
 Check for:
-- [ ] YAML frontmatter with name, description, and tools
+- [ ] YAML frontmatter with name, description, tools, and skills
 - [ ] Header with clear description
 - [ ] Tools Available section
 - [ ] Skills to Use section
@@ -229,7 +236,10 @@ Check for:
 ---
 name: database-migration
 description: Creates, validates, and runs database migrations safely
-tools: Bash, Read, Write, Grep, Glob
+tools: Bash, Read, Write, Grep, Glob, Task
+skills:
+  - lint-code
+  - review-changes
 ---
 
 # Database Migration Agent

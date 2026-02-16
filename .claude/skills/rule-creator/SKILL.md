@@ -1,6 +1,7 @@
 ---
 name: rule-creator
 description: Create project rules that auto-load into Claude's context. Use this skill to persist conventions, constraints, coding patterns, or project-specific requirements as `.md` files in `.claude/rules/`. Rules are auto-discovered by Claude Code.
+argument-hint: "[name]"
 ---
 
 # Rule Creator

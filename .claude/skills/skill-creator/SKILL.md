@@ -53,7 +53,9 @@ skill-name/
 ├── SKILL.md (required)
 │   ├── YAML frontmatter metadata (required)
 │   │   ├── name: (required)
-│   │   └── description: (required)
+│   │   ├── description: (required)
+│   │   ├── argument-hint: (optional)
+│   │   └── disable-model-invocation: (optional)
 │   └── Markdown instructions (required)
 └── Bundled Resources (optional)
     ├── scripts/          - Executable code (Python/Bash/etc.)
@@ -65,7 +67,11 @@ skill-name/
 
 Every SKILL.md consists of:
 
-- **Frontmatter** (YAML): Contains `name` and `description` fields. These are the only fields that Claude reads to determine when the skill gets used, thus it is very important to be clear and comprehensive in describing what the skill is, and when it should be used.
+- **Frontmatter** (YAML): Contains `name` and `description` fields (required). These are the only fields that Claude reads to determine when the skill gets used, thus it is very important to be clear and comprehensive in describing what the skill is, and when it should be used. Optional fields:
+  - `argument-hint`: Hint text shown after the slash command (e.g., `"[file-or-pattern]"`). Helps users understand what arguments the skill accepts.
+  - `disable-model-invocation`: Set to `true` to prevent the model from invoking this skill automatically. Use for skills that modify state (git operations, deployments) where manual invocation is preferred.
+  - `allowed-tools`: Restrict which tools the skill can use.
+  - `model`: Override the default model.
 - **Body** (Markdown): Instructions and guidance for using the skill. Only loaded AFTER the skill triggers (if at all).
 
 #### Bundled Resources (optional)

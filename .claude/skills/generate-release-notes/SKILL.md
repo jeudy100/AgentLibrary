@@ -1,6 +1,7 @@
 ---
 name: generate-release-notes
 description: Generate release notes from git commits, grouped by type and formatted for release.
+argument-hint: "[from-tag] [to-tag]"
 ---
 
 # generate-release-notes

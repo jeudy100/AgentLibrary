@@ -1,7 +1,11 @@
 ---
 name: build-validator
 description: Validates builds, checks dependencies, and runs quality gates
-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob, Bash, Task
+skills:
+  - run-tests
+  - lint-code
+  - analyze-coverage
 ---
 
 # Build Validator Agent

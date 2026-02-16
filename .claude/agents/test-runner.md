@@ -1,7 +1,10 @@
 ---
 name: test-runner
 description: Runs tests, analyzes failures, and suggests fixes
-tools: Bash, Read, Grep, Glob
+tools: Bash, Read, Grep, Glob, Task
+skills:
+  - run-tests
+  - analyze-coverage
 ---
 
 # Test Runner Agent

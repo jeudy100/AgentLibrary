@@ -1,7 +1,14 @@
 ---
 name: feature-implementer
 description: Implements features end-to-end: analyzes codebase, writes code, tests, validates, and updates context
-tools: Read, Write, Edit, Grep, Glob, Bash
+tools: Read, Write, Edit, Grep, Glob, Bash, Task
+skills:
+  - run-tests
+  - lint-code
+  - test-generator
+  - review-changes
+  - api-documenter
+  - adr-generator
 ---
 
 # Feature Implementer Agent

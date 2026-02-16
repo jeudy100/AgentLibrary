@@ -1,6 +1,7 @@
 ---
 name: refine
 description: Analyze an agent or skill definition by name and suggest improvements for clarity, structure, and error handling.
+argument-hint: "[name]"
 ---
 
 # refine

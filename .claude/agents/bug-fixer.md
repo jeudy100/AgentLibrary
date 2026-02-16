@@ -1,7 +1,12 @@
 ---
 name: bug-fixer
 description: Diagnoses and fixes bugs: reproduces, identifies root cause, applies minimal fix, adds regression tests
-tools: Read, Write, Edit, Grep, Glob, Bash
+tools: Read, Write, Edit, Grep, Glob, Bash, Task
+skills:
+  - run-tests
+  - lint-code
+  - test-generator
+  - review-changes
 ---
 
 # Bug Fixer Agent

@@ -2,6 +2,10 @@
 name: pattern-evaluator
 description: Evaluates and persists reusable patterns (rules, skills, agents) discovered during sessions
 tools: Read, Grep, Glob, Write
+skills:
+  - rule-creator
+  - skill-creator
+  - agent-creator
 ---
 
 # Pattern Evaluator Agent

@@ -1,7 +1,10 @@
 ---
 name: code-simplifier
 description: Analyzes code complexity and suggests targeted simplifications
-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob, Bash, Task
+skills:
+  - lint-code
+  - simplify-code
 ---
 
 # Code Simplifier Agent

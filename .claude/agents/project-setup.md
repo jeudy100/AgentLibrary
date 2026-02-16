@@ -1,7 +1,12 @@
 ---
 name: project-setup
 description: Initializes project foundations: git, testing, linting, CI/CD, documentation
-tools: Bash, Read, Write, Edit, Grep, Glob
+tools: Bash, Read, Write, Edit, Grep, Glob, Task
+skills:
+  - env-manager
+  - run-tests
+  - lint-code
+  - validate-context
 ---
 
 # Project Setup Agent

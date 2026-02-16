@@ -1,6 +1,7 @@
 ---
 name: lint-code
 description: Run code linters based on project configuration. Uses centralized detection to determine and run the appropriate linter.
+argument-hint: "[file-or-directory] [--fix]"
 ---
 
 # lint-code

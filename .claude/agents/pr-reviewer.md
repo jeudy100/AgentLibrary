@@ -1,7 +1,10 @@
 ---
 name: pr-reviewer
 description: Reviews code changes, checks quality and security
-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob, Bash, Task
+skills:
+  - review-changes
+  - lint-code
 ---
 
 # PR Reviewer Agent

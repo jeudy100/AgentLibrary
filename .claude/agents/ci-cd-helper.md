@@ -1,7 +1,10 @@
 ---
 name: ci-cd-helper
 description: Debugs CI/CD pipeline issues and fixes configuration
-tools: Read, Bash, Grep, Glob, WebFetch
+tools: Read, Bash, Grep, Glob, WebFetch, Task
+skills:
+  - run-tests
+  - lint-code
 ---
 
 # CI/CD Helper Agent

@@ -1,6 +1,7 @@
 ---
 name: test-generator
 description: Generate unit test stubs and boilerplate from source code analysis. Analyzes functions, classes, and modules to create comprehensive test scaffolding.
+argument-hint: "[file-or-directory]"
 ---
 
 # test-generator

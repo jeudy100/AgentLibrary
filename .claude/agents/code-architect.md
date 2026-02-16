@@ -1,7 +1,10 @@
 ---
 name: code-architect
 description: Analyzes architecture, detects anti-patterns, and evaluates design
-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob, Bash, Task
+skills:
+  - lint-code
+  - review-changes
 ---
 
 # Code Architect Agent

@@ -1,7 +1,11 @@
 ---
 name: release-manager
 description: Manages releases, generates changelogs, and handles version bumps
-tools: Bash, Read, Grep, Glob, Write, Edit
+tools: Bash, Read, Grep, Glob, Write, Edit, Task
+skills:
+  - commit
+  - generate-release-notes
+  - create-pr
 ---
 
 # Release Manager Agent

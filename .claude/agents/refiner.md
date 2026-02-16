@@ -1,7 +1,9 @@
 ---
 name: refiner
 description: Discovers and analyzes agent/skill definitions by name for quality improvement
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, Task
+skills:
+  - refine
 ---
 
 # Refiner Agent

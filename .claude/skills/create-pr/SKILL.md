@@ -1,6 +1,8 @@
 ---
 name: create-pr
 description: Create well-formatted pull requests with proper titles, descriptions, and metadata.
+argument-hint: '[--title "title"] [--base branch]'
+disable-model-invocation: true
 ---
 
 # create-pr

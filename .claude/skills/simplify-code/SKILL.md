@@ -1,6 +1,7 @@
 ---
 name: simplify-code
 description: Analyze code for complexity and suggest simplifications. Detects verbose patterns, redundant logic, and opportunities for cleaner code.
+argument-hint: "[file-or-directory]"
 ---
 
 # simplify-code

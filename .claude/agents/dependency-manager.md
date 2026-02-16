@@ -1,7 +1,10 @@
 ---
 name: dependency-manager
 description: Audits, updates, and manages project dependencies safely
-tools: Bash, Read, Grep, Glob, Edit, Write
+tools: Bash, Read, Grep, Glob, Edit, Write, Task
+skills:
+  - run-tests
+  - commit
 ---
 
 # Dependency Manager Agent
