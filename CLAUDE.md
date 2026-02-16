@@ -13,7 +13,7 @@ A reusable library of DevOps agents and skills for Claude Code. Drop the `.claud
 Agents are autonomous workers that handle complex, multi-step tasks. They run in isolated contexts and can use multiple skills.
 
 | Agent | Purpose |
-|-------|---------|
+| ----- | ------- |
 | `test-runner` | Runs tests, analyzes failures, suggests fixes |
 | `pr-reviewer` | Reviews code changes, checks quality and security |
 | `ci-cd-helper` | Debugs CI/CD pipeline issues |
@@ -32,6 +32,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 ### Using Agents
 
 Agents are invoked via the Task tool with the agent name:
+
 - "Run the test-runner agent to check all tests"
 - "Use pr-reviewer to review my changes"
 - "Use code-simplifier to simplify my recent changes"
@@ -51,7 +52,7 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 ### Development Skills
 
 | Skill | Purpose |
-|-------|---------|
+| ----- | ------- |
 | `/run-tests` | Execute tests based on project type |
 | `/analyze-coverage` | Analyze test coverage reports |
 | `/lint-code` | Run linters based on project config |
@@ -68,7 +69,7 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 ### Git/Release Skills
 
 | Skill | Purpose |
-|-------|---------|
+| ----- | ------- |
 | `/commit` | Create well-formatted commits |
 | `/commit-push` | Commit and push to remote |
 | `/review-changes` | Review staged/unstaged git changes |
@@ -95,7 +96,7 @@ When skills and agents need context, they use the **Explore** agent with a topic
 
 Place CLAUDE.md files anywhere in your project to provide instructions:
 
-```
+```txt
 project/
   CLAUDE.md                    # Root - always read
   src/
@@ -106,6 +107,7 @@ project/
 ```
 
 CLAUDE.md files can contain:
+
 - Coding conventions and patterns
 - Testing requirements
 - Security guidelines
@@ -137,6 +139,7 @@ CLAUDE.md files can contain:
 ## Language Support
 
 All components are language-agnostic. They detect project type from:
+
 - `package.json` (Node.js/JavaScript/TypeScript)
 - `pyproject.toml`, `setup.py`, `requirements.txt` (Python)
 - `go.mod` (Go)
@@ -148,7 +151,7 @@ All components are language-agnostic. They detect project type from:
 
 ## Directory Structure
 
-```
+```txt
 .claude/
   agents/
     test-runner.md
@@ -194,6 +197,7 @@ All components are language-agnostic. They detect project type from:
 **Plans and temporary files must NOT be saved in the project directory.**
 
 When creating plans, improvement documents, or any temporary working files:
+
 - Save to the user's `.claude` folder: `~/.claude/plans/` or `~/.claude/temp/`
 - On Windows: `C:\Users\<username>\.claude\plans\`
 - Never create a `.claude/plans/` folder in the project
