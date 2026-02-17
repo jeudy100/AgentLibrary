@@ -28,6 +28,7 @@ Agents are autonomous workers that handle complex, multi-step tasks. They run in
 | `pattern-evaluator` | Evaluates and persists reusable patterns (rules, skills, agents) discovered during sessions |
 | `feature-implementer` | Implements features end-to-end: analyzes codebase, writes code, tests, validates, and updates context |
 | `bug-fixer` | Diagnoses and fixes bugs: reproduces, identifies root cause, applies minimal fix, adds regression tests |
+| `advisor` | Conversational advisor for questions, discussions, and guidance — read-only, no code changes |
 
 ### Using Agents
 
@@ -43,6 +44,7 @@ Agents are invoked via the Task tool with the agent name:
 - "Use pattern-evaluator to assess reusable patterns from this session"
 - "Use feature-implementer to implement [feature description]"
 - "Use bug-fixer to diagnose and fix [bug description]"
+- "Use advisor to discuss [topic or question]"
 
 ## Skills
 
@@ -165,6 +167,7 @@ All components are language-agnostic. They detect project type from:
     pattern-evaluator.md
     feature-implementer.md
     bug-fixer.md
+    advisor.md
   skills/
     run-tests/SKILL.md
     lint-code/SKILL.md
