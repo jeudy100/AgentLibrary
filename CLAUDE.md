@@ -67,6 +67,7 @@ Skills are inline capabilities that can be invoked directly or used by agents.
 | `/validate-context` | Validate context structure for autodiscovery |
 | `/rule-creator` | Create project rules that auto-load into Claude's context |
 | `/design-doc` | Create or update a game design document (GDD) |
+| `/documenter` | Audit, update, and create project documentation |
 
 ### Git/Release Skills
 
@@ -190,6 +191,7 @@ All components are language-agnostic. They detect project type from:
     validate-context/SKILL.md
     rule-creator/SKILL.md
     design-doc/SKILL.md
+    documenter/SKILL.md
   rules/
     .gitkeep
 ```
