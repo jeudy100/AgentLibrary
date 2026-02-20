@@ -37,10 +37,10 @@ From the Explore results, extract:
 - Existing architecture patterns in use
 - Any architecture guidelines from CLAUDE.md
 
-### Step 2: Identify Systems to Audit
+### Step 2: Identify and Read Systems
 
 **If specific systems/directories provided:**
-- Analyze the provided systems directly
+- Read the source files in those systems directly using the Read tool
 
 **If no specific target:**
 - Scan the project structure to identify distinct systems (e.g., inventory, combat, networking, UI, player controller, AI, audio, save/load)
@@ -49,9 +49,24 @@ From the Explore results, extract:
   - Look for classes/files with suffixes like `System`, `Manager`, `Service`, `Controller`, `Handler`
 - Present the discovered systems and ask the user which to audit, or audit all
 
-### Step 3: Audit Each System
+**CRITICAL: Read the actual source code.** For each system identified:
+1. Use Glob to list all source files in the system directory
+2. Use Read to read each source file — do NOT skip this step or guess from file names alone
+3. Use Grep to trace cross-system dependencies (imports, references to other systems)
+4. Use Grep to find hardcoded values, singleton patterns, static references, god classes
 
-For each system, evaluate against these principles:
+The audit MUST be based on reading real code, not just documentation or file names.
+
+### Step 3: Audit Each System (Code-Level)
+
+Read and analyze the actual implementation of each system. For each source file:
+- Identify classes, their responsibilities, and line counts
+- Trace dependency chains (what does this system import/reference?)
+- Check for interface usage vs concrete type dependencies
+- Look for state mutation patterns and ownership
+- Measure function lengths and nesting depth
+
+Evaluate against these principles:
 
 | Principle | Question | Red Flags |
 |-----------|----------|-----------|
@@ -67,6 +82,8 @@ For each principle, assign a rating:
 - **Fail** - Significant violations that will cause scaling pain
 
 ### Step 4: Identify Problem Areas
+
+For every problem found, cite the specific file, class, and line number (e.g., `src/Combat/CombatManager.cs:142`). Include short code snippets showing the violation.
 
 Flag systems likely to cause pain at scale:
 
